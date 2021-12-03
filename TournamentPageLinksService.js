@@ -26,9 +26,4 @@ async function getTournamentPageLinks()
     return tournamentResultsSeasonList;
 }
 
-getTournamentResultsSeasonList().then(reponse => 
-    {
-        console.log(reponse)
-    });
-
 module.exports.getTournamentPageLinks = getTournamentPageLinks;
