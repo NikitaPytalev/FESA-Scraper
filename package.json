@@ -1,12 +1,13 @@
 {
-  "name": "fesacrawler",
+  "name": "fesa-scraper",
   "version": "1.0.0",
-  "description": "",
+  "description": "Extracts shogi tournament results data from http://www.shogi.net/fesa",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
-  "author": "",
+  "author": "Nikita Pytalev <3",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.24.0",
