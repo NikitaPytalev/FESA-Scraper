@@ -1,34 +1,39 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
 
-axios.get('http://www.shogi.net/fesa/index.php?mid=4&dateid=Fall+2021&tournamentid=Rated+games+in+the+Ginkammuri+Shogi+Dojo%2C+Minsk')
-    .then(response => {
-        const html = response.data
-        const $ = cheerio.load(html)
+async function getTournamentResults(link)
+{
+    console.log(`Fetching tournament results from: ${link}`)
 
-        const tables = $('#content > p:not(:last-child) > table'); // tables are inside paragraphs
-        const rowsSelector = 'tbody > tr:not(:nth-child(1)):not(:nth-child(2))';
-
-        const tournaments = [];
-        for (const table of tables)
-        {
-            const nameWithDate = (cheerio.load(table))('h3').html().split('<br>');
-            const name = nameWithDate[0];
-            const date =  nameWithDate[1];
-
-            const rowsHTML = (cheerio.load(table))(rowsSelector);
-            const rows = convertToRowsObject($, rowsHTML);
-
-            const tournament = {
-                name: name,
-                date: date,
-                rows: rows,
-                promotions: []
-            }
-
-            tournaments.push(tournament);
+    const response = await axios.get(link)
+    const html = response.data
+    const $ = cheerio.load(html)
+    
+    const tables = $('#content > p:not(:last-child) > table'); // tables are inside paragraphs
+    const rowsSelector = 'tbody > tr:not(:nth-child(1)):not(:nth-child(2))';
+    
+    const tournaments = [];
+    for (const table of tables)
+    {
+        const nameWithDate = (cheerio.load(table))('h3').html().split('<br>');
+        const name = nameWithDate[0];
+        const date =  nameWithDate[1];
+    
+        const rowsHTML = (cheerio.load(table))(rowsSelector);
+        const rows = convertToRowsObject($, rowsHTML);
+    
+        const tournament = {
+            name: name,
+            date: date,
+            rows: rows,
+            promotions: []
         }
-    })
+    
+        tournaments.push(tournament);
+    }
+
+    return tournaments;
+}
 
 function convertToRowsObject($, rowsHTML)
 {
@@ -66,4 +71,4 @@ function convertToRowsObject($, rowsHTML)
     return rows;
 }
 
-
+module.exports.getTournamentResults = getTournamentResults;

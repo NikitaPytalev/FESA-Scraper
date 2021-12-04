@@ -2,10 +2,13 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 const domain = 'http://www.shogi.net/fesa/';
+const tournamentListPage = 'http://www.shogi.net/fesa/index.php?mid=4&dateid=Fall+2002';
 
 async function getTournamentPageLinks()
 {
-    const response = await axios.get('http://www.shogi.net/fesa/index.php?mid=4&dateid=Fall+2002')
+    console.log(`Fetching tournament page links from: ${tournamentListPage}`)
+
+    const response = await axios.get(tournamentListPage);
     const html = response.data;
     let $ = cheerio.load(html);
 

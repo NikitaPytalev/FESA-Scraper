@@ -7,13 +7,13 @@ async function getTournamentsData()
     let tournaments = [];
     for(tournamentPageLink of tournamentPagelinks)
     {
-        const fetchedTournament = await getTournamentResults(tournamentPageLink);
-        tournaments.push(fetchedTournament);
+        const fetchedTournaments = await getTournamentResults(tournamentPageLink);
+        tournaments.push(...fetchedTournaments);
     }
 
     return tournaments;
 }
 
 getTournamentsData().then(result => {
-    console.log(result.data);
+    console.log(result);
 })
