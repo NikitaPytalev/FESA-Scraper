@@ -4,10 +4,9 @@
   "description": "Extracts shogi tournament results from http://www.shogi.net/fesa",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node index.js"
   },
-  "author": "Nikita Pytalev <3",
+  "author": "Nikita Pytalev",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.24.0",
