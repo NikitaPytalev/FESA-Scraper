@@ -1,7 +1,7 @@
 {
   "name": "fesa-scraper",
   "version": "1.0.0",
-  "description": "Extracts shogi tournament results data from http://www.shogi.net/fesa",
+  "description": "Extracts shogi tournament results from http://www.shogi.net/fesa",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
